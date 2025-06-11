@@ -1269,40 +1269,38 @@
             }
             
             speakResponse() {
-                if (this.isSpeaking) return;
-                
-                const text = document.getElementById('speechBubble').textContent;
-                const cleanText = text.replace(/[🎉⭐🌟🎈🎊💭🤔💡🌈😌💪🎯🧠✨]/g, '');
-                
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.rate = 0.75; // Slower for special needs
-                utterance.pitch = 1.2; // Higher, more engaging
-                utterance.volume = 0.9;
-                
-                const button = document.getElementById('speakButton');
-                button.textContent = '🔊 Speaking...';
-                this.isSpeaking = true;
-                
-                utterance.onend = () => {
-                    button.textContent = '🔊 Hear AI Response';
-                    this.isSpeaking = false;
-                };
-                
-                speechSynthesis.speak(utterance);
-                this.logMessage('AI response spoken aloud', 'speech');
-            }
-            
-            avatarClick() {
-                const greetings = [
-                    "Hi there! I love learning with you! 😊",
-                    "You're doing such an amazing job! Keep going! 🌟", 
-                    "I'm here to help you learn and have fun! 💪",
-                    "You're so smart and I believe in you! ✨"
-                ];
-                
-                const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-                this.updateSpeechBubble(greeting);
-                this.simulateEmotionChange('happy');
+               function speakResponse() {
+    console.log("speakResponse called"); // Debug log
+    
+    const text = document.getElementById('speechBubble').textContent;
+    console.log("Text to speak:", text); // Debug log
+    
+    // Check if speech synthesis is available
+    if (!('speechSynthesis' in window)) {
+        alert('Speech synthesis not supported in this browser');
+        return;
+    }
+    
+    // Clean text for speech
+    const cleanText = text.replace(/[🎉⭐🌟🎈🎊💭🤔💡🌈😌💪🎯🧠✨🤝]/g, '');
+    console.log("Clean text:", cleanText); // Debug log
+    
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.rate = 0.75;
+    utterance.pitch = 1.2;
+    utterance.volume = 0.9;
+    
+    utterance.onstart = () => console.log("Speech started");
+    utterance.onend = () => console.log("Speech ended");
+    utterance.onerror = (e) => console.log("Speech error:", e);
+    
+    // Stop any current speech
+    speechSynthesis.cancel();
+    
+    // Speak the text
+    speechSynthesis.speak(utterance);
+    
+    console.log("Speech synthesis called");
             }
         }
         
