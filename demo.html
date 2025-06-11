@@ -1269,8 +1269,9 @@
             }
             
             speakResponse() {
-               function speakResponse() {
     console.log("speakResponse called"); // Debug log
+    
+    if (this.isSpeaking) return;
     
     const text = document.getElementById('speechBubble').textContent;
     console.log("Text to speak:", text); // Debug log
@@ -1286,13 +1287,31 @@
     console.log("Clean text:", cleanText); // Debug log
     
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 0.75;
-    utterance.pitch = 1.2;
+    utterance.rate = 0.75; // Slower for special needs
+    utterance.pitch = 1.2; // Higher, more engaging
     utterance.volume = 0.9;
     
+    const button = document.getElementById('speakButton');
+    if (button) {
+        button.textContent = '🔊 Speaking...';
+    }
+    this.isSpeaking = true;
+    
     utterance.onstart = () => console.log("Speech started");
-    utterance.onend = () => console.log("Speech ended");
-    utterance.onerror = (e) => console.log("Speech error:", e);
+    utterance.onend = () => {
+        console.log("Speech ended");
+        if (button) {
+            button.textContent = '🔊 Hear AI Response';
+        }
+        this.isSpeaking = false;
+    };
+    utterance.onerror = (e) => {
+        console.log("Speech error:", e);
+        if (button) {
+            button.textContent = '🔊 Hear AI Response';
+        }
+        this.isSpeaking = false;
+    };
     
     // Stop any current speech
     speechSynthesis.cancel();
@@ -1301,55 +1320,7 @@
     speechSynthesis.speak(utterance);
     
     console.log("Speech synthesis called");
-            }
-        }
-        
-        // Global functions
-        let emotionAI;
-        
-        function toggleDetection() {
-            const button = document.getElementById('detectionToggle');
-            if (emotionAI.isDetecting) {
-                emotionAI.isDetecting = false;
-                clearInterval(emotionAI.detectionInterval);
-                button.textContent = '▶️ Start';
-                button.classList.remove('active');
-                emotionAI.logMessage('Emotion detection paused', 'emotion');
-            } else {
-                emotionAI.startDetection();
-                button.textContent = '🔍 Detection';
-                button.classList.add('active');
-            }
-        }
-        
-        function calibrateBaseline() {
-            emotionAI.baseline = { ...emotionAI.currentEmotions };
-            emotionAI.logMessage('Emotion baseline calibrated for this student', 'emotion');
-            emotionAI.updateStatus('✅ Baseline calibrated for personalized detection', 'success');
-        }
-        
-        function resetDetection() {
-            emotionAI.emotionHistory = [];
-            emotionAI.baseline = null;
-            emotionAI.logMessage('Detection system reset', 'emotion');
-        }
-        
-        function toggleListening() {
-            emotionAI.toggleListening();
-        }
-        
-        function speakResponse() {
-            emotionAI.speakResponse();
-        }
-        
-        function avatarClick() {
-            emotionAI.avatarClick();
-        }
-        
-        // Initialize when page loads
-        window.onload = function() {
-            emotionAI = new RealEmotionAI();
-        };
+}
     </script>
 </body>
 </html>
