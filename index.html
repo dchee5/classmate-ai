@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassMate AI - Your Emotion-Smart Learning Companion</title>
+    <meta name="description" content="ClassMate AI adapts to students' emotions in real-time, providing personalized learning experiences for special education students.">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="ClassMate AI - Your Emotion-Smart Learning Companion">
+    <meta property="og:description" content="Revolutionary AI companion that understands emotions and adapts learning for special education students.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://classmate.ai">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-demo {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-video {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-video:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .problem-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .problem-stats {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .big-stat {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #e67e22;
+            display: block;
+        }
+
+        /* Demo CTA Section */
+        .demo-cta {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .demo-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .demo-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .problem-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🤝 ClassMate AI</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#demo" class="cta-button">Try Demo</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content fade-in">
+                <h1>Your AI Learning Companion</h1>
+                <p class="subtitle">
+                    Meet ClassMate - the revolutionary AI that sees, understands, and adapts to your child's emotions in real-time, creating personalized learning experiences that help special education students thrive.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">7.5M</span>
+                        <span class="stat-label">Special needs students in US</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">23%</span>
+                        <span class="stat-label">Learning improvement</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Cost reduction vs human tutors</span>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn-primary">🚀 See Live Demo</a>
+                    <a href="#contact" class="btn-secondary">📞 Request Pilot</a>
+                </div>
+            </div>
+
+            <div class="hero-demo fade-in">
+                <div class="demo-video" onclick="goToDemo()">
+                    ▶️
+                </div>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <strong>Meet Your ClassMate</strong><br>
+                    Watch emotion detection and real-time learning adaptation
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-content">
+                <div>
+                    <h2 class="section-title">The Challenge</h2>
+                    <p style="font-size: 1.2rem; color: #7f8c8d; margin-bottom: 2rem;">
+                        Special education students need personalized attention, but traditional one-size-fits-all approaches fail to adapt to their emotional and learning states in real-time.
+                    </p>
+                    
+                    <div class="problem-stats">
+                        <span class="big-stat">75%</span>
+                        <p>of special needs children struggle with traditional learning methods that don't adapt to their emotional state</p>
+                    </div>
+
+                    <div class="problem-stats">
+                        <span class="big-stat">$30-50</span>
+                        <p>per hour for human tutors - making personalized learning unaffordable for most families</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #2c3e50;">Current Problems:</h3>
+                    <ul style="font-size: 1.1rem; line-height: 2; color: #7f8c8d;">
+                        <li>❌ Teachers can't monitor every student's emotional state</li>
+                        <li>❌ Learning content doesn't adapt to frustration or confusion</li>
+                        <li>❌ One-size-fits-all approaches fail special needs students</li>
+                        <li>❌ Expensive human tutors limit access to personalized learning</li>
+                        <li>❌ No real-time feedback on student engagement and stress</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why ClassMate Works</h2>
+            <p class="section-subtitle">
+                The world's first emotion-aware AI learning companion designed specifically for special education students
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎭</div>
+                    <h3 class="feature-title">Real-Time Emotion Detection</h3>
+                    <p class="feature-description">
+                        Advanced AI analyzes facial expressions, voice tone, and body language to understand student emotional state in real-time with 94%+ accuracy.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Adaptive Learning Engine</h3>
+                    <p class="feature-description">
+                        Content difficulty, pacing, and teaching style automatically adjust based on detected emotions - frustrated students get easier content and encouragement.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Your Personal AI Companion</h3>
+                    <p class="feature-description">
+                        Each student gets their own ClassMate that learns their unique personality, triggers, and optimal learning conditions, becoming a true learning partner.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🗣️</div>
+                    <h3 class="feature-title">Voice-to-Voice Interaction</h3>
+                    <p class="feature-description">
+                        Natural conversation capabilities with speech recognition and synthesis optimized for special needs students' communication patterns.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Progress Analytics</h3>
+                    <p class="feature-description">
+                        Detailed insights for teachers and parents on emotional patterns, learning progress, and IEP goal achievement with data-driven recommendations.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏫</div>
+                    <h3 class="feature-title">School District Integration</h3>
+                    <p class="feature-description">
+                        Seamlessly integrates with existing school systems, providing classroom management tools and curriculum alignment for easy adoption.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo CTA -->
+    <section class="demo-cta" id="demo">
+        <div class="container">
+            <h2>Meet Your ClassMate in Action</h2>
+            <p>Experience how ClassMate understands emotions and adapts learning in real-time</p>
+            <a href="demo.html" class="btn-primary" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+                🤝 Meet My ClassMate
+            </a>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                * Real emotion detection with any webcam - see the magic happen!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ClassMate AI</h3>
+                    <p>Your AI learning companion that understands emotions and adapts to help every student succeed.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#demo">Interactive Demo</a>
+                    <a href="#features">Features</a>
+                    <a href="#contact">Request Pilot</a>
+                    <a href="mailto:hello@classmate.ai">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>For Educators</h3>
+                    <a href="#pilot">School Pilot Program</a>
+                    <a href="#research">Research & Outcomes</a>
+                    <a href="#training">Teacher Training</a>
+                    <a href="#support">Technical Support</a>
+                </div>
+            </div>
+            <p>&copy; 2025 ClassMate AI. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Demo navigation
+        function goToDemo() {
+            window.location.href = 'demo.html';
+        }
+
+        // Contact form handling (you'll need to implement backend)
+        function handleContact(event) {
+            event.preventDefault();
+            alert('Thank you for your interest! We\'ll be in touch soon.');
+        }
+    </script>
+</body>
+</html>
+Add ClassMate AI landing page
